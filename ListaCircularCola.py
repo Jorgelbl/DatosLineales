@@ -1,18 +1,27 @@
+#se declara la clase Nodo
 class Nodo():
+    #metodo constructor de la clase Nodo
     def __init__(self, dato):
+        #atributos deL metodo construtor Nodo
         self.dato = dato
         self.siguiente = None
 
-class ListaCircular():
+#se declara la clase Lista Circular
+class ListaCircularCola():
+    #metodo constructor de la clase Lista circular
     def __init__(self):
+        #atributos del metodo constructor lista circular
         self.primero = None
         self.ultimo = None
 
-
+    #metodo para declarar si una cola esta vacia
     def Vacia(self):
+        #se retornan valores si la cola esta vacia
         return self.primero == None
 
-    def AgregarInicio(self, dato):
+    #metodo para agregar elementos al inicio de la cola
+    def AgregarElementoInicio(self, dato):
+        #comprobamos el metodo con un if-else
         if self.Vacia():
             self.primero = self.ultimo = Nodo(dato)
             self.ultimo.siguiente = self.primero
@@ -22,7 +31,9 @@ class ListaCircular():
             self.primero = aux
             self.ultimo.siguiente = self.primero
 
-    def AgregarFinal(self, dato):
+    #metodo para agregar elementos al final de la cola
+    def AgregarElementoFinal(self, dato):
+        # comprobamos el metodo con un if-else
         if self.Vacia():
             self.primero = self.ultimo = Nodo(dato)
             self.ultimo.siguiente = self.primero
@@ -31,37 +42,25 @@ class ListaCircular():
             self.ultimo = aux.siguiente = Nodo(dato)
             self.ultimo.siguiente = self.primero
 
-    def Recorrer(self):
+    #metodo para recorrer elementos
+    def RecorrerElemento(self):
         aux = self.primero
-        while aux.siguiente != self.primero:
-            print(aux.dato)
+        contador = 0
+        while aux:
+            print(aux.dato, end = "-->")
             aux = aux.siguiente
+            if aux == self.primero:
+                contador += 1
+            if contador == 2:
+                break
 
-    def RemoverInicio(self):
-        if self.Vacia():
-            print("Lista vacia")
-        elif self.primero == self.ultimo:
-            self.primero = self.ultimo = None
-        else:
-            self.primero = self.primero.siguiente
-            self.ultimo.siguiente = self.primero
-
-    def RemoverFin(self):
-        if self.Vacia():
-            print("Lista vacia")
-        elif self.primero == self.ultimo:
-            self.primero = self.ultimo = None
-        else:
-            aux = self.primero
-            while aux.siguiente != self.ultimo:
-                aux = aux.siguiente
-            aux.siguiente = self.primero
-            self.primero = aux
-
-
-s = ListaCircular()
-s.AgregarInicio(1)
-s.AgregarFinal(10)
-s.AgregarFinal(11)
-s.AgregarFinal(12)
-s.Recorrer()
+print('Cola Con Lista Circular' '\n')
+#instancia la clase
+elemento = ListaCircularCola()
+#agregamos un elemento al inicio de la cola
+elemento.AgregarElementoInicio(1)
+#agregamos elementos al final de la cola
+elemento.AgregarElementoFinal(2)
+elemento.AgregarElementoFinal(3)
+#recorremos los elementos de la cola
+elemento.RecorrerElemento()
