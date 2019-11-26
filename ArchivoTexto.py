@@ -1,18 +1,39 @@
+#se importa la libreria pickle
+import pickle
 
-#metodo para leer archivos textos
-def lectura_De_Archivos_Texto():
-    fichero = open("Texto.txt.txt", "r")
-    fichero = fichero.read()
-    print(fichero)
+#se declara la clase archivos textos
+class ArchivoTexto:
 
-#metodo para escribir archivos textos
-def Escritura_De_Archivos_Texto():
-    fichero = open("Texto.txt.txt", "w")
-    fichero.write("nueva linea 1\n")
-    fichero.write("nueva linea 2\n")
-    fichero.close()
+    #metodo para guardar archivos textos
+    def guardarArchivo(self, Archivo, lista):
+        #guardamos datos al archivo texto
+        file = open(Archivo, 'w')
+        pickle.dump(lista, file)
+        file.close()
+        #se elimina
+        del (file)
 
+    #metodo para abrir archivos textos
+    def abrirArchivo(self, Archivo):
+        #abrimos el archivo texto
+        file = open(Archivo, 'r')
+        lista = pickle.load(file)
+        file.close()
+        del (file)
+        #se retornan valores
+        return lista
 
+#se ejecuta el metodo principal
+def main():
+    #se guardan valores en una lista
+    Lista = ['alondra', 'beto', 'casas', 'dados', 'elote']
+    #se declara la clase pricipal
+    archivo_dos = ArchivoTexto()
+    #se guardan valores de la lista a un archivo texto
+    archivo_dos.guardarArchivo('Texto.txt', Lista)
+    #se muestran resultados del archivo texto
+    mostrar = archivo_dos.abrirArchivo('Texto.csv')
+    print(mostrar)
 
-lectura_De_Archivos_Texto()
-Escritura_De_Archivos_Texto()
+if __name__ == '_main_':
+    main()
